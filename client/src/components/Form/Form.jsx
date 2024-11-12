@@ -14,29 +14,29 @@ const Form = () => {
       street,
       subject
     };
-    tg.SendData(JSON.stringify(data));
-  }, [country, street, subject, tg]);
+    tg.sendData(JSON.stringify(data));
+  }, [country, street, subject]);
 
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onSendData);
     return () => {
       tg.offEvent('mainButtonClicked', onSendData);
     };
-  }, [onSendData, tg]);
+  }, [onSendData]);
 
   useEffect(() => {
     tg.MainButton.setParams({
       text: 'Send data'
     });
-  }, [tg]);
+  }, []);
 
   useEffect(() => {
-    if (!street || !country || !subject) {
+    if (!street || !country) {
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
     }
-  }, [country, street, subject, tg]);
+  }, [country, street]);
 
   const onChangeCountry = (e) => {
     setCountry(e.target.value);
@@ -73,7 +73,7 @@ const Form = () => {
         value={subject}
         onChange={onChangeSubject}
         className={'select'}
-        required
+
       >
         <option value={'physical'}>Private</option>
         <option value={'legal'}>Business</option>
