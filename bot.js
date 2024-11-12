@@ -22,16 +22,34 @@ bot.on('message', async msg => {
   if (text === '/start') {
     await bot.sendMessage(chatId, 'Форма замовлення внизу', {
       reply_markup: {
-        keyboard: [[{ text: 'Заповнити форму' }]],
+        keyboard: [[{ text: 'Заповнити форму', web_app: { url: webAppUrl + '/form' } }]],
       },
     });
 
-    await bot.sendMessage(chatId, 'ПЕреходь за посиланням', {
+    await bot.sendMessage(chatId, 'Пeреходь за посиланням', {
       reply_markup: {
         inline_keyboard: [[{ text: 'Замовити', web_app: { url: webAppUrl } }]],
       },
     });
   }
+
+  if (msg?.web_app_data?.data) {
+    try {
+      const data = JSON.parse(msg?.web_app_data.data)
+console.log(data)
+      await bot.sendMessage(chatId, 'Thanks for feedback!');
+      await bot.sendMessage(chatId, 'your country:' + data?.country);
+      await bot.sendMessage(chatId, 'your street:' + data?.street);
+
+      setTimeout( async () => {
+await bot.sendMessage('Thats all info!')
+      },3000)
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
 });
 
 console.log('Telegram Bot is running...');
