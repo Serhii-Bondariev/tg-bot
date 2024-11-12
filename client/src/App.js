@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useTelegram } from "./hooks/useTelegram";
 import Header from './components/Header/Header';
 import { Route, Routes } from "react-router-dom";
-import ProductList from './components/ProductList/ProductList';
+import ProductList from './components/ProductList/ProductList.jsx';
 import Form from './components/Form/Form';
 
 function App() {

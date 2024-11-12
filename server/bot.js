@@ -24,7 +24,7 @@ bot.on('message', async msg => {
     await bot.sendMessage(chatId, 'Форма замовлення внизу', {
       reply_markup: {
         keyboard: [[{ text: 'Заповнити форму', web_app: { url: webAppUrl + '/form' } }]],
-      },
+      }
     });
 
     await bot.sendMessage(chatId, 'Пeреходь за посиланням', {
